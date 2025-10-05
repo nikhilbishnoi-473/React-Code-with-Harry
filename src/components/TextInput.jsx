@@ -43,13 +43,13 @@ const TextInput = (props) => {
           ></textarea>
         </div>
         <div className=" d-flex gap-4 pt-4">
-          <button onClick={handleUpClick} className="btn btn-primary">
+          <button disabled={Text.length === 0} onClick={handleUpClick} className="btn btn-primary">
             Convert upper case
           </button>
-          <button onClick={handleLowerClick} className="btn btn-primary">
+          <button disabled={Text.length === 0}  onClick={handleLowerClick} className="btn btn-primary">
             Convert lower case
           </button>
-          <button onClick={handleDeleteClick} className="btn btn-primary">
+          <button disabled={Text.length === 0}  onClick={handleDeleteClick} className="btn btn-primary">
             Delete
           </button>
         </div>
@@ -57,7 +57,7 @@ const TextInput = (props) => {
       <div className="container" >
         <h1 className="mt-3">Your Text Summary</h1>
         <p>
-          {Text.split(" ").length} words and {Text.length} characters in this
+          {Text.split(" ").filter((element) => {return element.length!==0}).length} words and {Text.length} characters in this
           input
         </p>
         <p>{Text.length> 0? Text: "enter your text"}</p>

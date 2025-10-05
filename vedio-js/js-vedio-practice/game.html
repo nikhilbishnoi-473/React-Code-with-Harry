@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="min-vh-100 d-flex justify-content-center position-relative align-items-center">
+        <button class="modesbtn top-0 start-0 position-absolute">change mode</button>
+        <div class=" container d-flex justify-content-center align-items-center ">
+            <div class="d-flex flex-column">
+                <h1>js make game</h1>
+                <div class=" width_game pt-5 flex-wrap gap-2 d-flex">
+                    <button class="box_game"></button>
+                    <button class="box_game"></button>
+                    <button class="box_game"></button>
+                    <button class="box_game"></button>
+                    <button class="box_game"></button>
+                    <button class="box_game"></button>
+                    <button class="box_game"></button>
+                    <button class="box_game"></button>
+                    <button class="box_game"></button>
+                </div>
+                <button class="resetbtn mt-4">reset button</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        let box_game = document.querySelectorAll(".box_game");
+        let resetbtn = document.querySelector(".resetbtn")
+        let turnO = true; //player1 //player2'
+        const winPattern = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 4, 9],
+            [2, 4, 6],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8]
+        ];
+        box_game.forEach((box) => {
+            box.addEventListener("click", () => {
+                console.log("hover effect");
+                if (turnO) {
+                    box.innerText = "0";
+                    turnO = false;
+                } else {
+                    box.innerText = "X";
+                    turnO = true;
+                }
+                box.disabled = true;
+                checkWin();
+            });
+        });
+        const checkWin = () => {
+            for (let pattern of winPattern) {
+               let posval1 = box_game[pattern[0]].innerText;
+               let posval2 = box_game[pattern[1]].innerText;
+               let posval3 = box_game[pattern[2]].innerText;
+               if(posval1 != "" && posval2 != "" && posval3 != ""){
+                if(posval1 === posval2 && posval2 === posval3 ){
+                    console.log("winner", posval1 );
+                    
+                }
+               }
+            }
+        }
+
+        let modesbtn = document.querySelector(".modesbtn");
+        let body = document.querySelector("body")
+        let colorMode = "dark";
+        modesbtn.addEventListener("click", () => {
+            if (colorMode === "light") {
+                colorMode = "dark"
+                body.classList.add("dark")
+                body.classList.remove("light");
+            } else {
+                colorMode = "light"
+                body.classList.add("light")
+                body.classList.remove("dark");
+            }
+            console.log(colorMode);
+        })
+    </script>
+</body>
+
+</html>
